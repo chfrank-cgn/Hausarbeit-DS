@@ -9,7 +9,7 @@
 
 \subsection{Original Article}
 
-Original Article.\footnote{See \textit{Ducastel, A. (2024)}: Benchmark results of Kubernetes network plugins. \cite{originalArticle}} 
+In April 2024, \href{https://www.linkedin.com/in/alexisducastel/}{Alexis Ducastel} of \href{https://infrabuilder.com/}{InfraBuilder} published his benchmark results for Kubernetes network plugins.\footnote{See \textit{Ducastel, A. (2024)}: Benchmark results of Kubernetes network plugins. \cite{originalArticle}} This article continues a series of published benchmarks they had published in the years before. I obtained permission from Alexis Ducastel to use the historical benchmark data and explore the evolution of Kubernetes networking over time.
 
 \subsection{Kubernetes}
 
@@ -30,6 +30,18 @@ In 2015, Kubernetes reached the 1.0 milestone, and in 2016, it was donated to th
 
 \subsection{Container Network Interfaces}
 
+CNI plugins are essential components of Kubernetes clusters and are responsible for managing network connectivity between pods. They provide the underlying infrastructure for pod communication within and outside the cluster. Kubernetes offers a variety of CNI plugins, each with distinct features and performance characteristics, allowing administrators to select the optimal solution based on specific cluster requirements.\footnote{See \textit{Kubernetes (2024)}: Network Plugins. \cite{networkPlugin}}
+
+In this paper, we will focus on the CNI plugins available for the Rancher Kubernetes Engine:\footnote{See \textit{SUSE (2024)}: Network Options. \cite{networkOptions}}
+
+\begin{itemize}
+    \item \href{https://github.com/flannel-io/flannel}{Flannel}
+    \item \href{https://www.tigera.io/project-calico/}{Calico}
+    \item \href{https://docs.tigera.io/calico/latest/getting-started/kubernetes/flannel/install-for-flannel#installing-calico-for-policy-and-flannel-aka-canal-for-networking}{Canal}
+    \item \href{https://github.com/cilium/cilium}{Cilium}
+\end{itemize}
+
+
 \subsubsection{Flannel}
 
 Flannel is a well-established overlay network and provides a pure Layer 3 network fabric for Kubernetes clusters.\footnote{See \textit{Frank, C. (2020)}: Behind the scenes of Flannel. \cite{flannel}}
@@ -41,6 +53,8 @@ Flannel is a well-established overlay network and provides a pure Layer 3 networ
 \subsubsection{Cilium}
 
 \subsection{Research Question}
+
+In this paper, we will use data exploration techniques to provide guidance on which CNI to select for RKE2 based on current and historical performance data. We will focus on throughput, CPU, and memory consumption.
 
 \subsection{Gender-neutral Pronouns}
 
