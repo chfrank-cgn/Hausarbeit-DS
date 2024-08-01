@@ -41,16 +41,21 @@ In this paper, we will focus on the CNI plugins available for the Rancher Kubern
     \item \href{https://github.com/cilium/cilium}{Cilium}
 \end{itemize}
 
-
 \subsubsection{Flannel}
 
-Flannel is a well-established overlay network and provides a pure Layer 3 network fabric for Kubernetes clusters.\footnote{See \textit{Frank, C. (2020)}: Behind the scenes of Flannel. \cite{flannel}}
+Flannel is the oldest CNI in the list and is a well-established overlay network. It provides a Layer 3 network fabric for Kubernetes clusters. The simple and flat nature of the overlay network allows for easy troubleshooting. Its most commonly used transport backend is VXLAN.\footnote{See \textit{Frank, C. (2020)}: Behind the scenes of Flannel. \cite{flannel}}
 
 \subsubsection{Calico}
 
+Calico by \href{https://www.tigera.io/}{Tigera} uses IP routing and iptables for its data path and can create separate networks for various workloads. Calico is not a flat network, so it uses BGP to establish the routes between the nodes in a given Kubernetes cluster. Calico provides network policies and supports a variety of data planes.
+
 \subsubsection{Canal}
 
+Canal, also by Tigera, combines the Calico routing and policy engine with the Flannel transport. For RKE, Canal is the default CNI as it offers a VXLAN transport backend and network policies.
+
 \subsubsection{Cilium}
+
+Cilium by \href{https://isovalent.com/}{Isovalent} and now \href{https://www.cisco.com/}{Cisco} is the newest entry in the list of available CNIs for RKE. Cilium uses a data plane based on \href{https://ebpf.io/}{eBPF} and focuses on large networks and high network throughput.
 
 \subsection{Research Question}
 
@@ -60,7 +65,7 @@ In this paper, we will use data exploration techniques to provide guidance on wh
 
 Our society is becoming more open, inclusive, and gender-fluid, and now I think it's time to think about using gender-neutral pronouns in scientific texts, too. Two well-known researchers, Abigail C. Saguy and Juliet A. Williams, both from UCLA, propose to use the singular they/them instead: "The universal singular they is inclusive of people who identify as male, female or nonbinary."\footnote{\textit{Saguy, A. (2020)}: Why We Should All Use They/Them Pronouns. \cite{pronouns}} The aim is to support an inclusive approach in science through gender-neutral language. 
 
-In this paper, I'll attempt to follow this suggestion and invite all my readers to do the same for future articles. Thank you!
+In this paper, we'll attempt to follow this suggestion and invite all my readers to do the same for future articles. Thank you!
 
 If you're not sure about the definitions of gender and sex and how to use them, have a look at the definitions\footnote{See \textit{APA (2021)}: Definitions Related to Sexual Orientation. \cite{apaDefinitions}} by the American Psychological Association.
 

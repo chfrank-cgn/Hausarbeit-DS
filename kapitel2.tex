@@ -9,16 +9,129 @@
 
 \subsection{Original Data}
 
-For this paper's data analysis and visualization, I used raw benchmark data from the original author's Github for the years \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2024-01}{2024}, \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2021-05}{2021}, and \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2020-08}{2020}.
+For this paper's data analysis and visualization, we used raw benchmark data from the original author's Github pages for the years \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2024-01}{2024}, \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2021-05}{2021}, and \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2020-08}{2020}.
 
 \subsection{Data Wrangling}
 
-\subsubsection{Header}
+The original raw data for 2020 and 2021 are in tab-separated files without headers, split by CNI.
 
-\subsubsection{Data Transformation}
+\begin{figure}[H]
+\centering
+\caption {2024 Flannel Results}
+\includegraphics[width=\linewidth]{images/flannel-prom.png}
+\label{fig:flannel-prom}
+\end{figure}
+
+The original raw data for 2024 is formatted as \href{https://prometheus.io/docs/concepts/metric_types/#gauge}{Prometheus gauges}, also split by CNI.
+
+\subsubsection{2020 and 2021 Header}
+
+From the overall aggregated result spreadsheet, we added the following headers to the TSV Files and converted them to CSV format:
+
+\begin{itemize}
+    \item smem - "Server Memory (MB)"
+    \item scpu - "Server CPU (\%)"
+    \item cmem - "Client Memory (MB)"
+    \item ccpu - "Client CPU (\%)"
+    \item tcpbw - "TCP Pod to Pod Bandwidth (Mbit/s)"
+    \item tcpsm - "Server Memory (MB)"
+    \item tcpsc - "Server CPU (\%)"
+    \item tcpcm - "Client Memory (MB)"
+    \item tcpcc - "Client CPU (\%)"
+    \item udpbw - "UDP Pod to Pod Bandwidth (Mbit/s)"
+    \item udpsm - "Server Memory (MB)"
+    \item udpsc - "Server CPU (\%)"
+    \item udpcm - "Client Memory (MB)"
+    \item udpcc - "Client CPU (\%)"
+    \item tcpebw - "TCP Pod to Service Bandwidth (Mbit/s)"
+    \item tcpesm - "Server Memory (MB)"
+    \item tcpesc - "Server CPU (\%)"
+    \item tcpecm - "Client Memory (MB)"
+    \item tcpecc - "Client CPU (\%)"
+    \item udpebw - "UDP Pod to Service Bandwidth (Mbit/s)"
+    \item udpesm - "Server Memory (MB)"
+    \item udpesc - "Server CPU (\%)"
+    \item udpecm - "Client Memory (MB)"
+    \item udpecc - "Client CPU (\%)"
+\end{itemize}
+
+We also removed the discovered MTU size from the measurements, as it was a constant value and was also not present in the 2024 data.
+
+\subsubsection{2024 Data Transformation}
+
+The 2024 data format was vastly different, and we decided to convert the Prometheus gauges into CSV for easier handling. The 2024 data also had many more data points, so we mapped the gauges to the most appropriate fields and adjusted the scale where necessary (e.g., Bytes to Megabytes).
+
+\begin{itemize}
+    \item smem - "benchmark\_mem\_bytes - server - idle"
+    \item scpu - "benchmark\_cpu\_seconds - server - idle"
+    \item cmem - "benchmark\_mem\_bytes - client - idle"
+    \item ccpu - "benchmark\_cpu\_seconds - client - idle"
+    \item tcpbw - "benchmark\_iperf\_bandwidth\_bits\_per\_second - dts"
+    \item tcpsm - "benchmark\_mem\_bytes - server - dts"
+    \item tcpsc - "benchmark\_cpu\_seconds - server - dts"
+    \item tcpcm - "benchmark\_mem\_bytes - client - dts"
+    \item tcpcc - "benchmark\_cpu\_seconds - client - dts"
+    \item udpbw - "benchmark\_iperf\_bandwidth\_bits\_per\_second - dus"
+    \item udpsm - "benchmark\_mem\_bytes - server - dus"
+    \item udpsc - "benchmark\_cpu\_seconds - server - dus"
+    \item udpcm - "benchmark\_mem\_bytes - client - dus"
+    \item udpcc - "benchmark\_mem\_bytes - client - dus"
+    \item tcpebw - "benchmark\_iperf\_bandwidth\_bits\_per\_second - sts"
+    \item tcpesm - "benchmark\_mem\_bytes - server - sts"
+    \item tcpesc - "benchmark\_cpu\_seconds - server - sts"
+    \item tcpecm - "benchmark\_mem\_bytes - client - sts"
+    \item tcpecc - "benchmark\_cpu\_seconds - client - sts"
+    \item udpebw - "benchmark\_iperf\_bandwidth\_bits\_per\_second - sus"
+    \item udpesm - "benchmark\_mem\_bytes - server - sus"
+    \item udpesc - "benchmark\_cpu\_seconds - server - sus"
+    \item udpecm - "benchmark\_mem\_bytes - client - sus"
+    \item udpecc - "benchmark\_mem\_bytes - client - sus"
+\end{itemize}
 
 \subsection{What's Not in the Data}
 
+The benchmark data was recorded with the author's \href{https://github.com/InfraBuilder/k8s-bench-suite}{k8s-bench-suite}.
+
+The 2020 \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2020-08/blob/master/PROTOCOL.md}{setup} was three \href{https://www.supermicro.com/en/}{Supermicro} bare-metal servers connected through a Supermicro 10Gbit switch, running \href{https://ubuntu.com/server}{Ubuntu} 18.04 LTS and Kubernetes 1.19.0.
+
+2020 CNI Versions:
+\begin{itemize}
+    \item Flannel: v0.12.0
+    \item Calico: v3.16.1
+    \item Canal: v3.16.1
+    \item Cilium: v1.8.2
+\end{itemize}
+
+The 2021 \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2021-05/blob/main/PROTOCOL.md}{setup} was three Supermicro bare-metal servers connected through a Supermicro 10Gbit switch, running Ubuntu 20.04 LTS and Kubernetes 1.21.0.
+
+2021 CNI Versions:
+\begin{itemize}
+    \item Flannel: v0.15.1
+    \item Calico: v3.19.2
+    \item Canal: v3.19.2
+    \item Cilium: v1.11.2
+\end{itemize}
+
+For 2024, three Supermicro bare-metal servers were connected through a Supermicro 40Gbit switch, running Ubuntu 22.04 LTS and Kubernetes 1.26.12.\footnote{See \textit{Ducastel, A. (2024)}: Benchmark results of Kubernetes network plugins. \cite{originalArticle}}
+
+2024 CNI Versions:
+\begin{itemize}
+    \item Flannel: v0.24.3
+    \item Calico: v3.27.2
+    \item Canal: v3.27.2
+    \item Cilium: v1.15.2
+\end{itemize}
+
 \subsection{Data Exploration}
 
+We will analyze the data sets using the methods of Exploratory Data Analysis (EDA).
+
+John Tukey has promoted EDA since 1977 to encourage data scientists to explore data and formulate hypotheses that could lead to new data collection and experiments.\footnote{See \textit{Tukey, J.W. (1977)}: Exploratory data analysis. \cite{exploratoryDA}}
+
+EDA uses statistical methods to analyze and visualize the data, understand key characteristics, and identify patterns and relationships. We will not use the data to predict performance gains in future releases of the CNIs or through improved network speeds.
+
 \subsection{Tools}
+
+We performed most of the initial data wrangling with \href{https://www.gnu.org/software/bash/}{Bash}, \href{https://pubs.opengroup.org/onlinepubs/9699919799/utilities/vi.html}{vi}, and \href{https://www.microsoft.com/en-us/microsoft-365/excel}{Microsoft Excel}.
+
+For the subsequent data exploration, we used \href{https://www.r-project.org/}{R} and \href{https://posit.co/download/rstudio-desktop/}{RStudio}.
