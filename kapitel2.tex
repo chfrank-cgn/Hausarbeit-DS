@@ -26,7 +26,7 @@ The original raw data for 2024 is formatted as \href{https://prometheus.io/docs/
 
 \subsubsection{2020 and 2021 Header}
 
-From the overall aggregated result spreadsheet, we added the following headers to the TSV Files and converted them to CSV format:
+From the overall aggregated result spreadsheetw, we added the following headers to the TSV Files and converted them to CSV format:
 
 \begin{itemize}
     \item smem - "Server Memory (MB)"
@@ -92,7 +92,7 @@ The 2024 data format was vastly different, and we decided to convert the Prometh
 
 The benchmark data was recorded with the author's \href{https://github.com/InfraBuilder/k8s-bench-suite}{k8s-bench-suite}.
 
-The 2020 \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2020-08/blob/master/PROTOCOL.md}{setup} was three \href{https://www.supermicro.com/en/}{Supermicro} bare-metal servers connected through a Supermicro 10Gbit switch, running \href{https://ubuntu.com/server}{Ubuntu} 18.04 LTS and Kubernetes 1.19.0.
+The \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2020-08/blob/master/PROTOCOL.md}{2020 setup} was three \href{https://www.supermicro.com/en/}{Supermicro} bare-metal servers connected through a Supermicro 10Gbit switch, running \href{https://ubuntu.com/server}{Ubuntu} 18.04 LTS and Kubernetes 1.19.0.
 
 2020 CNI Versions:
 \begin{itemize}
@@ -102,7 +102,7 @@ The 2020 \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2020-08/blob/ma
     \item Cilium: v1.8.2
 \end{itemize}
 
-The 2021 \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2021-05/blob/main/PROTOCOL.md}{setup} was three Supermicro bare-metal servers connected through a Supermicro 10Gbit switch, running Ubuntu 20.04 LTS and Kubernetes 1.21.0.
+The \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2021-05/blob/main/PROTOCOL.md}{2021 setup} was three Supermicro bare-metal servers connected through a Supermicro 10Gbit switch, running Ubuntu 20.04 LTS and Kubernetes 1.21.0.
 
 2021 CNI Versions:
 \begin{itemize}
@@ -132,6 +132,30 @@ EDA uses statistical methods to analyze and visualize the data, understand key c
 
 \subsection{Tools}
 
-We performed most of the initial data wrangling with \href{https://www.gnu.org/software/bash/}{Bash}, \href{https://pubs.opengroup.org/onlinepubs/9699919799/utilities/vi.html}{vi}, and \href{https://www.microsoft.com/en-us/microsoft-365/excel}{Microsoft Excel}.
+We performed most of the initial data wrangling with \href{https://www.gnu.org/software/bash/}{Bash}, \href{https://pubs.opengroup.org/onlinepubs/9699919799/utilities/vi.html}{vi}, and \href{https://www.microsoft.com/en-us/microsoft-365/excel}{Microsoft Excel} to support operations on columns.
 
-For the subsequent data exploration, we used \href{https://www.r-project.org/}{R} and \href{https://posit.co/download/rstudio-desktop/}{RStudio}.
+For the subsequent data exploration, we will use \href{https://www.r-project.org/}{R} and \href{https://posit.co/download/rstudio-desktop/}{RStudio}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{version}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+platform       x86_64-w64-mingw32               
+arch           x86_64                           
+os             mingw32                          
+crt            ucrt                             
+system         x86_64, mingw32                  
+status                                          
+major          4                                
+minor          2.3                              
+year           2023                             
+month          03                               
+day            15                               
+svn rev        83980                            
+language       R                                
+version.string R version 4.2.3 (2023-03-15 ucrt)
+nickname       Shortstop Beagle                 
+\end{verbatim}

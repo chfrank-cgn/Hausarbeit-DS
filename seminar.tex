@@ -1,5 +1,5 @@
 %
-% Angepasste FOM Seminarvorlage
+% Angepasste FOM Seminarvorlage (2024)
 %
 \documentclass[12pt,a4paper,listof=totoc,bibliography=totoc]{scrartcl}
 
@@ -23,6 +23,17 @@
 \renewcommand{\ttdefault}{pcr}
 % \renewcommand{\lstlistlistingname}{List of Code Examples}
 % \renewcommand{\lstlistingname}{Example}
+
+%
+%RStudio
+%
+\usepackage{color}
+\usepackage{fancyvrb}
+\usepackage{framed}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
 
 % Bildueberschrift oben und rechtsbuendig
 \captionsetup{labelfont=bf, textfont=bf}
@@ -90,6 +101,9 @@ This work is licensed under the Creative Commons Attribution 4.0 International L
 \cleardoublepage
 
 \listoffigures				% Abbildungsverzeichnis
+\cleardoublepage
+
+\listoftables               % Tabellen
 \cleardoublepage
 
 % \lstlistoflistings			% Codeverzeichnis
