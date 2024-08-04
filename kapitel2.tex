@@ -9,7 +9,7 @@
 
 \subsection{Original Data}
 
-For this paper's data analysis and visualization, we will use raw benchmark data from the original author's Github pages for the years \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2024-01}{2024}, \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2021-05}{2021}, and \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2020-08}{2020} and perform a secondary data analysis.\footnote{See \textit{Jillier, W. (2021)}: A Guide To Secondary Data Analysis. \cite{secondaryDA}}
+For this paper's data analysis and visualization, we will use raw benchmark data from the original author's Github pages for the years \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2024-01}{2024}, \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2021-05}{2021}, and \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2020-08}{2020} and perform a secondary data analysis.\footnote{See \textit{Jillier, W. (2021)}: A Guide To Secondary Data Analysis. \cite{secondaryDA}} We will use the previously collected measurements instead of gathering new data to answer our research question.
 
 \subsection{Data Wrangling}
 
@@ -55,7 +55,7 @@ From the overall aggregated result spreadsheets, we added the following headers 
     \item udpecc - "Client CPU (\%)"
 \end{itemize}
 
-We also removed the discovered MTU size from the measurements, as it was a constant value and was also not present in the 2024 data.
+We also removed the discovered MTU size from the measurements, as it was a constant value and was not present in the 2024 data.
 
 \subsubsection{2024 Data Transformation}
 
@@ -140,7 +140,7 @@ We will analyze the data sets using the methods of Exploratory Data Analysis (ED
 
 John Tukey has promoted EDA since 1977 to encourage data scientists to explore data and formulate hypotheses that could lead to new data collection and experiments.\footnote{See \textit{Tukey, J.W. (1977)}: Exploratory data analysis. \cite{exploratoryDA}}
 
-EDA uses statistical methods to analyze and visualize the data, understand key characteristics, and identify patterns and relationships. We will not use the data to predict performance gains in future releases of the CNIs or through improved network speeds.
+EDA uses statistical methods to analyze and visualize the data, understand key characteristics, and identify patterns and relationships. We will not use the data to predict performance gains in future releases of the CNIs or through improved network speeds; we will focus on our research question instead and attempt to arrive at a recommendation for the CNI usage.
 
 \subsection{Tools}
 
