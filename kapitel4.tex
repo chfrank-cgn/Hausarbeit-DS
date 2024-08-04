@@ -9,11 +9,11 @@
 
 \subsection{Performance Considerations}
 
-\subsection{CPU Usage}
+\subsection{Server CPU Usage}
 
 \begin{table}[h!]
-\caption{Median CPU Usage}
-\begin{tabular}{||c | c | c | c | c||} 
+\caption{Median Server CPU Usage}
+\begin{tabular}{|c | c | c | c | c|} 
  \hline
  Year & Flannel & Calico & Canal & Cilium \\
  \hline\hline
@@ -27,11 +27,11 @@
 \label{tab:cpu}
 \end{table}
 
-\subsection{Memory Usage}
+\subsection{Server Memory Usage}
 
 \begin{table}[h!]
-\caption{Median Memory Consumption}
-\begin{tabular}{||c | c | c | c | c||} 
+\caption{Median Server Memory Consumption}
+\begin{tabular}{|c | c | c | c | c|} 
  \hline
  Year & Flannel & Calico & Canal & Cilium \\
  \hline\hline
@@ -45,11 +45,11 @@
 \label{tab:mem}
 \end{table}
 
-\subsection{Throughput}
+\subsection{Pod-to-Pod Bandwidth}
 
 \begin{table}[h!]
-\caption{Median Bandwidth}
-\begin{tabular}{||c | c | c | c | c||} 
+\caption{Median Pod-to-Pod Bandwidth}
+\begin{tabular}{|c | c | c | c | c|} 
  \hline
  Year & Flannel & Calico & Canal & Cilium \\
  \hline\hline
@@ -60,9 +60,29 @@
  2024 & 0 & 0 & 0 & 0 \\
  \hline
 \end{tabular}
-\label{tab:bw}
+\label{tab:p2pbw}
+\end{table}
+
+\subsection{Pod-to-Server Bandwidth}
+
+\begin{table}[h!]
+\caption{Median Pod-to-Server Bandwidth}
+\begin{tabular}{|c | c | c | c | c|} 
+ \hline
+ Year & Flannel & Calico & Canal & Cilium \\
+ \hline\hline
+ 2020 & 0 & 0 & 0 & 0 \\ 
+ \hline
+ 2021 & 0 & 0 & 0 & 0 \\
+ \hline
+ 2024 & 0 & 0 & 0 & 0 \\
+ \hline
+\end{tabular}
+\label{tab:p2ebw}
 \end{table}
 
 \subsection{Results}
+
+For real,\footnote{See \textit{Kelly, J. (2024)}: Gen-Z Slang Is Revolutionizing Work Jargon. \cite{genzSlang}} I think Flannel is the next option
 
 \subsection{Outlook}

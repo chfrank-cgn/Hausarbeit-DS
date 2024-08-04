@@ -9,7 +9,7 @@
 
 \subsection{Original Data}
 
-For this paper's data analysis and visualization, we used raw benchmark data from the original author's Github pages for the years \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2024-01}{2024}, \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2021-05}{2021}, and \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2020-08}{2020}.
+For this paper's data analysis and visualization, we will use raw benchmark data from the original author's Github pages for the years \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2024-01}{2024}, \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2021-05}{2021}, and \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2020-08}{2020} and perform a secondary data analysis.\footnote{See \textit{Jillier, W. (2021)}: A Guide To Secondary Data Analysis. \cite{secondaryDA}}
 
 \subsection{Data Wrangling}
 
@@ -26,7 +26,7 @@ The original raw data for 2024 is formatted as \href{https://prometheus.io/docs/
 
 \subsubsection{2020 and 2021 Header}
 
-From the overall aggregated result spreadsheetw, we added the following headers to the TSV Files and converted them to CSV format:
+From the overall aggregated result spreadsheets, we added the following headers to the TSV Files and converted them to CSV format:
 
 \begin{itemize}
     \item smem - "Server Memory (MB)"
@@ -94,33 +94,45 @@ The benchmark data was recorded with the author's \href{https://github.com/Infra
 
 The \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2020-08/blob/master/PROTOCOL.md}{2020 setup} was three \href{https://www.supermicro.com/en/}{Supermicro} bare-metal servers connected through a Supermicro 10Gbit switch, running \href{https://ubuntu.com/server}{Ubuntu} 18.04 LTS and Kubernetes 1.19.0.
 
-2020 CNI Versions:
-\begin{itemize}
-    \item Flannel: v0.12.0
-    \item Calico: v3.16.1
-    \item Canal: v3.16.1
-    \item Cilium: v1.8.2
-\end{itemize}
+\begin{table}[h!]
+\caption{2020 CNI Versions}
+\begin{tabular}{|c | c | c | c |} 
+ \hline
+ Flannel & Calico & Canal & Cilium \\
+ \hline
+ v0.12.0 & v3.16.1 & v3.16.1 & v1.8.2 \\ 
+ \hline
+\end{tabular}
+\label{tab:2020ver}
+\end{table}
 
 The \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2021-05/blob/main/PROTOCOL.md}{2021 setup} was three Supermicro bare-metal servers connected through a Supermicro 10Gbit switch, running Ubuntu 20.04 LTS and Kubernetes 1.21.0.
 
-2021 CNI Versions:
-\begin{itemize}
-    \item Flannel: v0.15.1
-    \item Calico: v3.19.2
-    \item Canal: v3.19.2
-    \item Cilium: v1.11.2
-\end{itemize}
+\begin{table}[h!]
+\caption{2021 CNI Versions}
+\begin{tabular}{|c | c | c | c |} 
+ \hline
+ Flannel & Calico & Canal & Cilium \\
+ \hline
+ v0.15.1 & v3.19.2 & v3.19.2 & v1.11.2 \\ 
+ \hline
+\end{tabular}
+\label{tab:2021ver}
+\end{table}
 
 For 2024, three Supermicro bare-metal servers were connected through a Supermicro 40Gbit switch, running Ubuntu 22.04 LTS and Kubernetes 1.26.12.\footnote{See \textit{Ducastel, A. (2024)}: Benchmark results of Kubernetes network plugins. \cite{originalArticle}}
 
-2024 CNI Versions:
-\begin{itemize}
-    \item Flannel: v0.24.3
-    \item Calico: v3.27.2
-    \item Canal: v3.27.2
-    \item Cilium: v1.15.2
-\end{itemize}
+\begin{table}[h!]
+\caption{2024 CNI Versions}
+\begin{tabular}{|c | c | c | c |} 
+ \hline
+ Flannel & Calico & Canal & Cilium \\
+ \hline
+ v0.24.3 & v3.27.2 & v3.27.2 & v1.15.2 \\ 
+ \hline
+\end{tabular}
+\label{tab:2024ver}
+\end{table}
 
 \subsection{Data Exploration}
 
@@ -132,9 +144,9 @@ EDA uses statistical methods to analyze and visualize the data, understand key c
 
 \subsection{Tools}
 
-We performed most of the initial data wrangling with \href{https://www.gnu.org/software/bash/}{Bash}, \href{https://pubs.opengroup.org/onlinepubs/9699919799/utilities/vi.html}{vi}, and \href{https://www.microsoft.com/en-us/microsoft-365/excel}{Microsoft Excel} to support operations on columns.
+We performed most of the initial data wrangling with \href{https://www.gnu.org/software/bash/}{Bash} and \href{https://pubs.opengroup.org/onlinepubs/9699919799/utilities/vi.html}{vi}, and \href{https://www.microsoft.com/en-us/microsoft-365/excel}{Microsoft Excel} to support operations on columns.
 
-For the subsequent data exploration, we will use \href{https://www.r-project.org/}{R} and \href{https://posit.co/download/rstudio-desktop/}{RStudio}:
+For the subsequent data exploration, we will use \href{https://www.r-project.org/}{R} and \href{https://posit.co/download/rstudio-desktop/}{RStudio}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
