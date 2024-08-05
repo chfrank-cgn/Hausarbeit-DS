@@ -9,7 +9,9 @@
 
 \subsection{Data Layout}
 
-After wrangling, all data files contain the following five blocks of metrics in a single row per observation:
+The data consists of twelve datasets, one per year (3) and one per CNI (4).
+
+After our data wrangling, all datasets now contain the following five blocks of metrics in a single row per observation:
 
 \begin{itemize}
     \item Idle server memory and CPU consumption
@@ -19,9 +21,9 @@ After wrangling, all data files contain the following five blocks of metrics in 
     \item UDP Pod-to-Server bandwidth, memory, and CPU consumption
 \end{itemize}
 
-Pod-to-Pod traffic refers to traffic between Pods in the same cluster, and Pod-to-Server traffic refers to traffic from a Pod to an outside application.
+For our data, Pod-to-Pod traffic refers to traffic between Pods in the same cluster, and Pod-to-Server traffic refers to traffic from a Pod to an outside application.
 
-The individual field names are derived from the first row in each data file.
+The individual field names are derived from each dataset's first row and are consistent across all sets.
 
 \subsection{2020}
 
@@ -74,12 +76,11 @@ visually inspect the measurements.
  $ udpecc: num  12.6 12.7 12.7 12.7 12.6 ...
 \end{verbatim}
 
-The values for memory consumption (MB), CPU usage (Percentage), and
-bandwidth (MBit/s) look fine.
+The various values for memory consumption (MB), CPU usage (Percentage), and
+bandwidth (MBit/s) look fine at first glance.
 
-For further analysis, we will inspect the key values a bit more
-closely, starting with memory consumption. Looking at the idle values,
-we get:
+For further analysis, we will inspect the values a bit more
+closely, starting with memory consumption. First, we'll look at the idle values and get:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -121,8 +122,9 @@ we get:
 [1] 606
 \end{verbatim}
 
-Validating this with the other measurements, we get a fairly consistent
-picture:
+As the Median is more robust against outliers and works better with data that might be skewed, we'll focus on the median values going forward.\footnote{See \textit{Orn, A. (2023)}: Means and Medians: When To Use Which. \cite{meansMedians}}
+
+Comparing the idle memory consumption with the other measurements for memory consumption (TCP and UDP, and Pod-to-Pod and Pod-to-Server), we get a fairly consistent picture:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -164,7 +166,7 @@ picture:
 [1] 594.3655
 \end{verbatim}
 
-Next, we will check CPU consumption, starting with idle values:
+Next, we will check CPU consumption, starting again with idle values:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -206,8 +208,7 @@ Next, we will check CPU consumption, starting with idle values:
 [1] 0.82
 \end{verbatim}
 
-When we validate this with the other values, we get again fairly
-consistent values across the measurements, but a clear differentiation
+When we validate this with the other measurements for CPU consumption, we get again fairly consistent values across the measurements but a clear differentiation
 to the idle values:
 
 \begin{Shaded}
@@ -249,6 +250,8 @@ to the idle values:
 \begin{verbatim}
 [1] 5.30168
 \end{verbatim}
+
+Idle CPU consumption does not seem to be a good overall performance indicator
 
 The final data point we want to look at is bandwidth, the core
 performance metric for a network:\footnote{See \textit{Solarwinds (2024)}: What are Network Performance Metrics? \cite{networkPerformance}}
@@ -296,6 +299,8 @@ performance metric for a network:\footnote{See \textit{Solarwinds (2024)}: What 
 With the majority of the internet traffic being TCP, we will focus on
 the measurements for TCP for analysis and comparison.\footnote{See \textit{Quian, L. (2012)}: A flow-based performance analysis of TCP and TCP applications. \cite{tcpTraffic}}
 
+We visualize both the TCP Pod-to-Pod and Pod-to-Server traffic bandwidth using histograms:
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{gf\_histogram}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{tcpbw, }\AttributeTok{data =}\NormalTok{ cni")} 
@@ -322,6 +327,52 @@ the measurements for TCP for analysis and comparison.\footnote{See \textit{Quian
 \label{fig:flannel-9-1}
 \end{figure}
 
+The data distribution supports our choice to use the median values as key indicators for TCP bandwidth.
+
+After a highly scientific coin toss,\footnote{See \textit{Kim, S.E. (2024)}: Scientists Destroy Illusion That Coin Toss Flips Are 50–50. \cite{coinToss}} we will use the TCP Pod-to Server values for CPU usage and memory consumption for further analysis.
+
+From the 2020 Flannel dataset, we will thus use the following values:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 590.1462
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 5.055657
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpbw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 9705.809
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpebw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 9828.35
+\end{verbatim}
+
 \subsubsection{Calico}
 
 \subsubsection{Canal}
@@ -332,8 +383,7 @@ the measurements for TCP for analysis and comparison.\footnote{See \textit{Quian
 
 \subsubsection{Flannel}
 
-This is the 2021 data set for Flannel, which we will read using R's
-built-in read.csv function.
+We will now read the 2021 data set for Flannel.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -361,10 +411,7 @@ inspect the measurements.
  ...
 \end{verbatim}
 
-The values for memory consumption (MB), CPU usage (Percentage), and
-bandwidth (MBit/s) look fine.
-
-We'll extract the key metrics for further analysis:
+Then, we'll extract the key metrics for further analysis:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -406,6 +453,7 @@ We'll extract the key metrics for further analysis:
 [1] 9825.204
 \end{verbatim}
 
+The difference between the measurements in the 2020 and 2021 data sets is not that big; the data was taken only a couple of months apart, and the CNI versions were relatively close to each other.
 
 \subsubsection{Calico}
 
@@ -417,8 +465,7 @@ We'll extract the key metrics for further analysis:
 
 \subsubsection{Flannel}
 
-This is the 2024 data set for Flannel, which we will read using R's
-built-in read.csv function.
+We will now read the 2024 data set for Flannel.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -446,10 +493,7 @@ inspect the measurements.
  ...
 \end{verbatim}
 
-The values for memory consumption (MB), CPU usage (Percentage), and
-bandwidth (MBit/s) look fine.
-
-We'll extract the key metrics for further analysis:
+Then, we'll extract the key metrics for further analysis:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -491,7 +535,7 @@ We'll extract the key metrics for further analysis:
 [1] 18942.3
 \end{verbatim}
 
-Compared to the previous years, we can see a significant increase in bandwidth.
+Compared to the previous years, we can see a significant increase in bandwidth. Between the 2021 and 2024 measurements were significant improvements in Kubernetes development and also the infrastructure setup now has 40GBit interface cards and switches.
 
 \subsubsection{Calico}
 
