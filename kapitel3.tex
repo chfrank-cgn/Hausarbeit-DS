@@ -329,7 +329,7 @@ We visualize both the TCP Pod-to-Pod and Pod-to-Server traffic bandwidth using h
 
 The data distribution supports our choice to use the median values as key indicators for TCP bandwidth.
 
-After a highly scientific coin toss,\footnote{See \textit{Kim, S.E. (2024)}: Scientists Destroy Illusion That Coin Toss Flips Are 50–50. \cite{coinToss}} we will use the TCP Pod-to Server values for CPU usage and memory consumption for further analysis.
+Following the results of a scientific coin toss,\footnote{See \textit{Kim, S.E. (2024)}: Scientists Destroy Illusion That Coin Toss Flips Are 50–50. \cite{coinToss}} we will use the TCP Pod-to Server values for CPU usage and memory consumption for further analysis.
 
 From the 2020 Flannel dataset, we will thus use the following values:
 
@@ -375,9 +375,222 @@ From the 2020 Flannel dataset, we will thus use the following values:
 
 \subsubsection{Calico}
 
+We will now read the 2020 data set for Calico.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{main }\OtherTok{\textless{}{-}} \StringTok{"."}
+\NormalTok{cni }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(main,}\StringTok{"data"}\NormalTok{,}\StringTok{"2020{-}calico.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+In the next step, we will examine the structure of our data and visually
+inspect the measurements.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(cni)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+'data.frame':   3091 obs. of  24 variables:
+ $ smem  : num  667 665 666 669 665 ...
+ $ scpu  : num  1.64 1.64 1.62 1.64 1.63 ...
+ $ cmem  : num  666 666 666 653 666 ...
+ $ ccpu  : num  1.27 1.27 1.31 1.3 1.29 ...
+ $ tcpbw : num  8879 8885 8884 8882 8884 ...
+ $ tcpsm : num  660 664 662 664 660 ...
+ ...
+\end{verbatim}
+
+Then, we'll extract the key metrics for further analysis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 659.3846
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 6.44727
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpbw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 8882.457
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpebw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 8675.868
+\end{verbatim}
+
 \subsubsection{Canal}
 
+We will now read the 2020 data set for Canal.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{main }\OtherTok{\textless{}{-}} \StringTok{"."}
+\NormalTok{cni }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(main,}\StringTok{"data"}\NormalTok{,}\StringTok{"2020{-}canal.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+In the next step, we will examine the structure of our data and visually
+inspect the measurements.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(cni)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+'data.frame':   3076 obs. of  24 variables:
+ $ smem  : num  662 659 663 663 663 ...
+ $ scpu  : num  1.43 1.56 1.49 1.47 1.43 ...
+ $ cmem  : num  663 663 660 666 659 ...
+ $ ccpu  : num  1.97 2.01 1.98 1.99 1.96 ...
+ $ tcpbw : num  8490 8586 8635 8647 8648 ...
+ $ tcpsm : num  659 656 655 657 657 ...
+ ...
+\end{verbatim}
+
+Then, we'll extract the key metrics for further analysis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 655.4456
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 6.697056
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpbw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 8634.413
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpebw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 8576.709
+\end{verbatim}
+
 \subsubsection{Cilium}
+
+We will now read the 2020 data set for Cilium.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{main }\OtherTok{\textless{}{-}} \StringTok{"."}
+\NormalTok{cni }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(main,}\StringTok{"data"}\NormalTok{,}\StringTok{"2020{-}cilium.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+In the next step, we will examine the structure of our data and visually
+inspect the measurements.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(cni)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+'data.frame':   3082 obs. of  24 variables:
+ $ smem  : num  859 867 863 857 863 ...
+ $ scpu  : num  3.95 3.68 2.63 3.32 3.53 ...
+ $ cmem  : num  867 872 871 868 864 ...
+ $ ccpu  : num  1.78 1.74 1.69 1.73 1.76 ...
+ $ tcpbw : num  9445 9547 9467 9449 9466 ...
+ $ tcpsm : num  861 867 864 864 864 ...
+ ...
+\end{verbatim}
+
+Then, we'll extract the key metrics for further analysis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 866.5502
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 13.2222
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpbw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 9475.213
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpebw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 9673.348
+\end{verbatim}
 
 \subsection{2021}
 
@@ -457,9 +670,222 @@ The difference between the measurements in the 2020 and 2021 data sets is not th
 
 \subsubsection{Calico}
 
+We will now read the 2021 data set for Calico.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{main }\OtherTok{\textless{}{-}} \StringTok{"."}
+\NormalTok{cni }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(main,}\StringTok{"data"}\NormalTok{,}\StringTok{"2021{-}calico.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+In the next step, we will examine the structure of our data and visually
+inspect the measurements.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(cni)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+'data.frame':   3103 obs. of  24 variables:
+ $ smem  : num  663 669 663 665 667 ...
+ $ scpu  : num  1.56 1.56 1.64 1.6 1.61 ...
+ $ cmem  : num  666 664 665 669 667 ...
+ $ ccpu  : num  1.25 1.24 1.25 1.27 1.24 ...
+ $ tcpbw : num  8868 8875 8873 8867 8880 ...
+ $ tcpsm : num  664 665 663 659 663 ...
+ ...
+\end{verbatim}
+
+Then, we'll extract the key metrics for further analysis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 661.9909
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 6.366529
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpbw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 8876.478
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpebw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 8763.889
+\end{verbatim}
+
 \subsubsection{Canal}
 
+We will now read the 2021 data set for Canal.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{main }\OtherTok{\textless{}{-}} \StringTok{"."}
+\NormalTok{cni }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(main,}\StringTok{"data"}\NormalTok{,}\StringTok{"2021{-}canal.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+In the next step, we will examine the structure of our data and visually
+inspect the measurements.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(cni)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+'data.frame':   3115 obs. of  24 variables:
+ $ smem  : num  657 661 660 663 656 ...
+ $ scpu  : num  1.49 1.51 1.47 1.51 1.51 ...
+ $ cmem  : num  653 658 666 656 651 ...
+ $ ccpu  : num  1.99 1.86 1.94 2.01 2.01 ...
+ $ tcpbw : num  8638 8636 8627 8639 8605 ...
+ $ tcpsm : num  652 653 659 659 656 ...
+ ...
+\end{verbatim}
+
+Then, we'll extract the key metrics for further analysis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 659.3958
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 6.66032
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpbw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 8612.275
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpebw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 8579.366
+\end{verbatim}
+
 \subsubsection{Cilium}
+
+We will now read the 2021 data set for Cilium.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{main }\OtherTok{\textless{}{-}} \StringTok{"."}
+\NormalTok{cni }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(main,}\StringTok{"data"}\NormalTok{,}\StringTok{"2021{-}cilium.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+In the next step, we will examine the structure of our data and visually
+inspect the measurements.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(cni)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+'data.frame':   3105 obs. of  24 variables:
+ $ smem  : num  871 868 868 867 868 ...
+ $ scpu  : num  3.25 2.85 3.31 3.3 3.67 ...
+ $ cmem  : num  864 869 866 880 879 ...
+ $ ccpu  : num  1.69 1.7 1.66 1.65 1.72 ...
+ $ tcpbw : num  9450 9458 9440 9532 9450 ...
+ $ tcpsm : num  865 863 863 866 868 ...
+ ...
+\end{verbatim}
+
+Then, we'll extract the key metrics for further analysis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 867.1192
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 12.77646
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpbw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 9444.988
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpebw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 9679.113
+\end{verbatim}
 
 \subsection{2024}
 
@@ -532,13 +958,228 @@ Then, we'll extract the key metrics for further analysis:
 \end{Shaded}
 
 \begin{verbatim}
-[1] 18942.3
+[1] 19942.3
 \end{verbatim}
 
 Compared to the previous years, we can see a significant increase in bandwidth. Between the 2021 and 2024 measurements were significant improvements in Kubernetes development and also the infrastructure setup now has 40GBit interface cards and switches.
 
 \subsubsection{Calico}
 
+We will now read the 2024 data set for Calico.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{main }\OtherTok{\textless{}{-}} \StringTok{"."}
+\NormalTok{cni }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(main,}\StringTok{"data"}\NormalTok{,}\StringTok{"2024{-}calico.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+In the next step, we will examine the structure of our data and visually
+inspect the measurements.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(cni)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+'data.frame':   3098 obs. of  24 variables:
+ $ smem  : num  1435 1413 1414 1402 1419 ...
+ $ scpu  : num  0.0213 0.02 0.0212 0.0213 0.0206 ...
+ $ cmem  : num  1377 1370 1361 1369 1364 ...
+ $ ccpu  : num  0.0259 0.025 0.0243 0.0265 0.0252 ...
+ $ tcpbw : num  18520 18603 18600 18549 18524 ...
+ $ tcpsm : num  1388 1390 1397 1394 1399 ...
+ ...
+\end{verbatim}
+
+Then, we'll extract the key metrics for further analysis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1420.843
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 5.446998
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpbw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 18571.56
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpebw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 19263.95
+\end{verbatim}
+
 \subsubsection{Canal}
 
+We will now read the 2024 data set for Canal.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{main }\OtherTok{\textless{}{-}} \StringTok{"."}
+\NormalTok{cni }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(main,}\StringTok{"data"}\NormalTok{,}\StringTok{"2024{-}canal.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+In the next step, we will examine the structure of our data and visually
+inspect the measurements.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(cni)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+'data.frame':   3088 obs. of  24 variables:
+ $ smem  : num  1243 1269 1269 1269 1245 ...
+ $ scpu  : num  0.0281 0.0281 0.0281 0.0281 0.0281 ...
+ $ cmem  : num  1235 1229 1228 1238 1238 ...
+ $ ccpu  : num  0.0233 0.0251 0.0228 0.0284 0.0276 ...
+ $ tcpbw : num  16841 16843 16840 16845 16847 ...
+ $ tcpsm : num  1260 1279 1257 1242 1233 ...
+ ...
+\end{verbatim}
+
+Then, we'll extract the key metrics for further analysis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1285.42
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 5.647729
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpbw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 16842.78
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpebw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 16328.69
+\end{verbatim}
+
 \subsubsection{Cilium}
+
+We will now read the 2024 data set for Cilium.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{main }\OtherTok{\textless{}{-}} \StringTok{"."}
+\NormalTok{cni }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(main,}\StringTok{"data"}\NormalTok{,}\StringTok{"2024{-}cilium.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+In the next step, we will examine the structure of our data and visually
+inspect the measurements.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(cni)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+'data.frame':   3101 obs. of  24 variables:
+ $ smem  : num  1612 1613 1607 1605 1604 ...
+ $ scpu  : num  0.0111 0.0109 0.0111 0.0126 0.0121 ...
+ $ cmem  : num  1596 1592 1603 1597 1594 ...
+ $ ccpu  : num  0.0118 0.0122 0.0125 0.0123 0.0122 ...
+ $ tcpbw : num  20929 20932 20761 20525 20675 ...
+ $ tcpsm : num  1538 1538 1538 1538 1534 ...
+ ...
+\end{verbatim}
+
+Then, we'll extract the key metrics for further analysis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1521.506
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpesc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 6.152466
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpbw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 20709.53
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(cni}\SpecialCharTok{\$}\NormalTok{tcpebw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 21758.27
+\end{verbatim}
+
+We have now processed all datasets.
