@@ -27,7 +27,7 @@
 \label{tab:cpu}
 \end{table}
 
-\subsection{Server Memory Usage}
+\subsection{Server Memory Consumption}
 
 \begin{table}[H]
 \caption{Median Server Memory Consumption}
@@ -81,8 +81,25 @@
 \label{tab:p2ebw}
 \end{table}
 
+\subsection{Weighted Ranking}
+
+Now that we have the performance figures, we need to identify the best overall choice. We'll use a weighted ranking of the performance criteria to do this.
+
+The weighted ranking works by assigning a rank or score to individual items based on multiple criteria, where each criterion is given a specific weight or importance level.\footnote{See \textit{Gemini (2024)}: Weighted Ranking. \cite{bardWeigthed}}
+
+For the overall network performance, we'll assign the following weights:
+
+\begin{itemize}
+    \item CPU usage: 20\%
+    \item Memory consumption: 30\%
+    \item Pod-to-Pod Bandwidth: 25\%
+    \item Pod-to-Server Bandwidth: 25\%
+\end{itemize}
+
+We'll use Microsoft Excel for the results.\footnote{See \textit{Bobbitt, Z. (2023)}: How to Calculate Weighted Ranking in Excel. \cite{howtoWeigh}}
+
 \subsection{Results}
 
-For real,\footnote{See \textit{Kelly, J. (2024)}: Gen-Z Slang Is Revolutionizing Work Jargon. \cite{genzSlang}} I think Flannel is the next option
+For real,\footnote{See \textit{Kelly, J. (2024)}: Gen-Z Slang Is Revolutionizing Work Jargon. \cite{genzSlang}} I think Flannel is still the best option unless you need to implement network policies.
 
 \subsection{Outlook}
