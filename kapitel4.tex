@@ -9,7 +9,15 @@
 
 \subsection{Performance Considerations}
 
+In the previous chapter, we identified our key performance metrics: CPU consumption, memory usage, and TCP bandwidth. 
+
+We will now tabulate the performance metrics and define a ranking for each CNI within each metric and each year.
+
+As a final step, we will weigh the rankings to arrive at an overall ranking for the CNI performance.
+
 \subsection{Server CPU Usage}
+
+The first metric that we want to look at is server CPU usage.
 
 \begin{table}[H]
 \caption{Median Server CPU Usage}
@@ -27,7 +35,29 @@
 \label{tab:cpu}
 \end{table}
 
+We get a fairly uniform distribution across the three measurements. In 2024, we have a much more powerful set of hardware for our servers with more modern CPUs, and we can see that Cilium benefits the most from the improvement in CPU.
+
+Overall, we get the following ranking of the CNIs:
+
+\begin{table}[H]
+\caption{Server CPU Usage Ranking}
+\begin{tabular}{|c | c | c | c | c|} 
+ \hline
+ Year & 1st & 2nd & 3rd & 4th \\
+ \hline\hline
+ 2020 & Flannel & Calico & Canal & Cilium \\ 
+ \hline
+ 2021 & Flannel & Calico & Canal & Cilium \\
+ \hline
+ 2024 & Flannel & Calico & Canal & Cilium \\
+ \hline
+\end{tabular}
+\label{tab:cpu-r}
+\end{table}
+
 \subsection{Server Memory Consumption}
+
+The second metric we want to look at is server memory consumption.
 
 \begin{table}[H]
 \caption{Median Server Memory Consumption}
@@ -45,7 +75,29 @@
 \label{tab:mem}
 \end{table}
 
+We again get a reasonably uniform distribution, albeit with Canal in 2nd place. The 2024 data shows that all CNIs use the bigger hardware and consume more memory.
+
+We get the following ranking of the CNIs:
+
+\begin{table}[H]
+\caption{Server Memory Consumption Ranking}
+\begin{tabular}{|c | c | c | c | c|} 
+ \hline
+ Year & 1st & 2nd & 3rd & 4th \\
+ \hline\hline
+ 2020 & Flannel & Canal & Calico & Cilium \\ 
+ \hline
+ 2021 & Flannel & Canal & Calico & Cilium \\
+ \hline
+ 2024 & Flannel & Canal & Calico & Cilium \\
+ \hline
+\end{tabular}
+\label{tab:mem-r}
+\end{table}
+
 \subsection{Pod-to-Pod Bandwidth}
+
+The third metric will be the first bandwidth metric.
 
 \begin{table}[H]
 \caption{Median Pod-to-Pod Bandwidth}
@@ -63,7 +115,29 @@
 \label{tab:p2pbw}
 \end{table}
 
+The bandwidth distribution is slightly more varied, with Cilium gaining the most over the years. The 2024 data shows that all CNIs use the faster NIC speed and the updated kernel, and a significant increase in bandwidth was observed.
+
+We get the following ranking of the CNIs, with Cilium overtaking Flannel and occupying first place:
+
+\begin{table}[H]
+\caption{Pod-to-Pod Bandwidth Ranking}
+\begin{tabular}{|c | c | c | c | c|} 
+ \hline
+ Year & 1st & 2nd & 3rd & 4th \\
+ \hline\hline
+ 2020 & Flannel & Cilium & Calico & Canal \\ 
+ \hline
+ 2021 & Flannel & Cilium & Calico & Canal \\
+ \hline
+ 2024 & Cilium & Flannel & Calico & Canal \\
+ \hline
+\end{tabular}
+\label{tab:p2pbw-r}
+\end{table}
+
 \subsection{Pod-to-Server Bandwidth}
+
+The fourth and final metric will be the second bandwidth metric.
 
 \begin{table}[H]
 \caption{Median Pod-to-Server Bandwidth}
@@ -81,9 +155,29 @@
 \label{tab:p2ebw}
 \end{table}
 
+The data again shows that in 2024 all CNIs use the faster NIC speed and show an overall increase in bandwidth.
+
+We get the same ranking for the CNIs, with Cilium overtaking Flannel and again occupying first place for Pod-to-Server communication:
+
+\begin{table}[H]
+\caption{Pod-to-Server Bandwidth Ranking}
+\begin{tabular}{|c | c | c | c | c|} 
+ \hline
+ Year & 1st & 2nd & 3rd & 4th \\
+ \hline\hline
+ 2020 & Flannel & Cilium & Calico & Canal \\ 
+ \hline
+ 2021 & Flannel & Cilium & Calico & Canal \\
+ \hline
+ 2024 & Cilium & Flannel & Calico & Canal \\
+ \hline
+\end{tabular}
+\label{tab:p2ebw-r}
+\end{table}
+
 \subsection{Weighted Ranking}
 
-Now that we have the performance figures, we need to identify the best overall choice. We'll use a weighted ranking of the performance criteria to do this.
+Now that we have the performance figures, we must identify the best overall choice. We'll use a weighted ranking of the performance criteria to do this.
 
 The weighted ranking works by assigning a rank or score to individual items based on multiple criteria, where each criterion is given a specific weight or importance level.\footnote{See \textit{Gemini (2024)}: Weighted Ranking. \cite{bardWeigthed}}
 
@@ -96,10 +190,91 @@ For the overall network performance, we'll assign the following weights:
     \item Pod-to-Server Bandwidth: 25\%
 \end{itemize}
 
-We'll use Microsoft Excel for the results.\footnote{See \textit{Bobbitt, Z. (2023)}: How to Calculate Weighted Ranking in Excel. \cite{howtoWeigh}}
+We'll use the reverse values for the individual rankings of the four CNIs, i.e., 4 for first place and 1 for last place.
+
+We'll use Microsoft Excel to tabulate the results.\footnote{See \textit{Bobbitt, Z. (2023)}: How to Calculate Weighted Ranking in Excel. \cite{howtoWeigh}}
 
 \subsection{Results}
 
-For real,\footnote{See \textit{Kelly, J. (2024)}: Gen-Z Slang Is Revolutionizing Work Jargon. \cite{genzSlang}} I think Flannel is still the best option unless you need to implement network policies.
+In 2020 and 2021, the results were pretty clear:
+
+% Table generated by Excel2LaTeX from sheet '2020'
+\begin{table}[H]
+  \caption{Table generated by Excel2LaTeX from sheet 2020}
+    \begin{tabular}{|l | r | r | r | r| r | r |}
+    \hline
+    CNI   & CPU & Memory & P2P & P2E & Avg & Rank \\
+    \hline\hline
+    Weight & 0.2   & 0.3   & 0.25  & 0.25  &       &  \\
+    \hline
+    Flannel & 4     & 4     & 4     & 4     & 4     & 1 \\
+    \hline
+    Calico & 3     & 2     & 2     & 2     & 2.2   & 2 \\
+    \hline
+    Canal & 2     & 3     & 1     & 1     & 1.8   & 4 \\
+    \hline
+    Cilium & 1     & 1     & 3     & 3     & 2     & 3 \\
+    \hline
+    \end{tabular}%
+  \label{tab:e2l-2020}%
+\end{table}%
+
+% Table generated by Excel2LaTeX from sheet '2021'
+\begin{table}[H]
+  \caption{Table generated by Excel2LaTeX from sheet 2021}
+    \begin{tabular}{|l | r | r | r | r| r | r |}
+    \hline
+    CNI   & CPU & Memory & P2P & P2E & Avg & Rank \\
+    \hline\hline
+    Weight & 0.2   & 0.3   & 0.25  & 0.25  &       &  \\
+    \hline
+    Flannel & 4     & 4     & 4     & 4     & 4     & 1 \\
+    \hline
+    Calico & 3     & 2     & 2     & 2     & 2.2   & 2 \\
+    \hline
+    Canal & 2     & 3     & 1     & 1     & 1.8   & 4 \\
+    \hline
+    Cilium & 1     & 1     & 3     & 3     & 2     & 3 \\
+    \hline
+    \end{tabular}%
+  \label{tab:e2l-2021}%
+\end{table}%
+
+Flannel is on top, delivering the highest bandwidth with the lowest CPU and memory usage; Canal comes in second, and Cilium third. It is interesting to note that Canal takes last place, even though it is, in essence, a combination of Calico and Flannel. 
+
+In 2024, though, the faster hardware and the years of development and improvement of eBPF and Cilium are changing the picture. Cilium shows a lot of bandwidth gains and moves up to second place.
+
+% Table generated by Excel2LaTeX from sheet '2024'
+\begin{table}[htbp]
+  \caption{Table generated by Excel2LaTeX from sheet 2024}
+    \begin{tabular}{|l | r | r | r | r| r | r |}
+    \hline
+    CNI   & CPU & Memory & P2P & P2E & Avg & Rank \\
+    \hline\hline
+    Weight & 0.2   & 0.3   & 0.25  & 0.25  &       &  \\
+    \hline
+    Flannel & 4     & 4     & 3     & 3     & 3.5   & 1 \\
+    \hline
+    Calico & 3     & 2     & 2     & 2     & 2.2   & 3 \\
+    \hline
+    Canal & 2     & 3     & 1     & 1     & 1.8   & 4 \\
+    \hline
+    Cilium & 1     & 1     & 4     & 4     & 2.5   & 2 \\
+    \hline
+    \end{tabular}%
+  \label{tab:e2l-2024}%
+\end{table}%
+
+Looking at bandwidth alone, Cilium would take first place. Also, with all the additional features we haven't looked at, such as a built-in load balancer and the myriad of observability features, it makes a compelling use case for itself.
+
+For real,\footnote{See \textit{Kelly, J. (2024)}: Gen-Z Slang Is Revolutionizing Work Jargon. \cite{genzSlang}} I still think that Flannel is the best option for a CNI unless you need to implement network policies, and I, for one, was thrilled when SUSE announced full support for Flannel in RKE2 earlier this year.\footnote{See \textit{Frank, C. (2024)}: RKE2: Flannel? Flannel! \cite{rke2Flannel}}
+
+From the data analysis, we can now clearly guide you to select either Flannel or Cilium as the CNI for your RKE cluster. Your choice will depend on whether you need the additional features that Cilium offers or whether you can live with Flannel's flat overlay network.
 
 \subsection{Outlook}
+
+EBPF is currently the most talked-about feature in networking, offering the most exciting prospects for performance improvements. Cilium was developed on top of eBPF and will significantly benefit from future enhancements. It does not take much imagination to see a significant increase in bandwidth in the future.
+
+On the other hand, Flannel is very simple and has a low overhead, so all performance improvements for Linux networking outside of eBPF will also benefit its performance and bandwidth.
+
+Both CNIs will likely remain the top choices in Kubernetes networking for the next few years.
