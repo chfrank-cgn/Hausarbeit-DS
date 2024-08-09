@@ -9,7 +9,7 @@
 
 \subsection{Original Article}
 
-In April 2024, \href{https://www.linkedin.com/in/alexisducastel/}{Alexis Ducastel} of \href{https://infrabuilder.com/}{InfraBuilder} published his benchmark results for Kubernetes network plugins.\footnote{See \textit{Ducastel, A. (2024)}: Benchmark results of Kubernetes network plugins. \cite{originalArticle}} This article continues a series of published benchmarks they had published in the years before. I obtained permission from Alexis Ducastel to use the historical benchmark data to explore the evolution of Kubernetes networking over time.
+In April 2024, \href{https://www.linkedin.com/in/alexisducastel/}{Alexis Ducastel} of \href{https://infrabuilder.com/}{InfraBuilder} published their benchmark results for Kubernetes network plugins.\footnote{See \textit{Ducastel, A. (2024)}: Benchmark results of Kubernetes network plugins. \cite{originalArticle}} This article continues a series of published benchmarks they had published in the years before. I obtained permission from Alexis Ducastel to use the historical benchmark data to explore the evolution of Kubernetes networking over time.
 
 \subsection{Kubernetes}
 
@@ -32,7 +32,7 @@ In 2015, Kubernetes reached the 1.0 milestone, and in 2016, it was donated to th
 
 CNI plugins are essential components of Kubernetes clusters and are responsible for managing network connectivity between pods. They provide the underlying infrastructure for pod communication within and outside the cluster. Kubernetes offers a variety of CNI plugins, each with distinct features and performance characteristics, allowing administrators to select the optimal solution based on specific cluster requirements.\footnote{See \textit{Kubernetes (2024)}: Network Plugins. \cite{networkPlugin}}
 
-In this paper, we will focus on the four CNI plugins available for the Rancher Kubernetes Engine:\footnote{See \textit{SUSE (2024)}: Network Options. \cite{networkOptions}}
+In this paper, we will focus on the four CNI plugins available for the \href{https://www.suse.com/}{SUSE} Rancher Kubernetes Engine:\footnote{See \textit{SUSE (2024)}: Network Options. \cite{networkOptions}}
 
 \begin{itemize}
     \item \href{https://github.com/flannel-io/flannel}{Flannel}
@@ -59,13 +59,13 @@ Cilium by \href{https://isovalent.com/}{Isovalent} and now \href{https://www.cis
 
 \subsection{Research Question}
 
-This paper will use data exploration techniques to guide which CNI to select for RKE2 based on current and historical performance data.\footnote{See \textit{Tukey, J.W. (1977)}: Exploratory data analysis. \cite{exploratoryDA}} For guidance, we will focus on throughput, CPU, and memory consumption.
+This paper will use data exploration techniques to guide which CNI to select for RKE2 based on current and historical performance data.\footnote{See \textit{Tukey, J.W. (1977)}: Exploratory data analysis. \cite{exploratoryDA}} To deliver guidance, we will focus on bandwidth, CPU, and memory consumption.
 
 \subsection{Gender-neutral Pronouns}
 
 Our society is becoming more open, inclusive, and gender-fluid, and now I think it's time to think about using gender-neutral pronouns in scientific texts, too. Two well-known researchers, Abigail C. Saguy and Juliet A. Williams, both from UCLA, propose to use the singular they/them instead: "The universal singular they is inclusive of people who identify as male, female or nonbinary."\footnote{\textit{Saguy, A. (2020)}: Why We Should All Use They/Them Pronouns. \cite{pronouns}} The aim is to support an inclusive approach in science through gender-neutral language. 
 
-In this paper, we'll attempt to follow this suggestion and invite all my readers to do the same for future articles. Thank you!
+We'll attempt to follow this suggestion in this paper, and I invite all our readers to do the same for future articles. Thank you!
 
 If you're not sure about the definitions of gender and sex and how to use them, have a look at the definitions\footnote{See \textit{APA (2021)}: Definitions Related to Sexual Orientation. \cite{apaDefinitions}} by the American Psychological Association.
 

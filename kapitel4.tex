@@ -9,7 +9,7 @@
 
 \subsection{Performance Considerations}
 
-In the previous chapter, we've already identified our key performance metrics: CPU consumption, memory usage, and TCP bandwidth. 
+In the previous chapters, we've already identified our key performance metrics: CPU consumption, memory usage, and TCP bandwidth. 
 
 In the first step of the analysis, we will tabulate the performance metrics and, from the results, define a ranking for each CNI within each metric and each year.
 
@@ -271,12 +271,12 @@ Looking at bandwidth alone, though, Cilium would have taken first place. Also, w
 
 For real,\footnote{See \textit{Kelly, J. (2024)}: Gen-Z Slang Is Revolutionizing Work Jargon. \cite{genzSlang}} I see Flannel as the best option for a CNI unless you need to implement network policies, and I, for one, was thrilled when SUSE announced full support for Flannel in RKE2 earlier this year.\footnote{See \textit{Frank, C. (2024)}: RKE2: Flannel? Flannel! \cite{rke2Flannel}}
 
-From the data analysis, we can now clearly guide you to select either Flannel or Cilium as the CNI for your RKE cluster. Your choice will depend on whether you need the additional features that Cilium offers or whether you can live with Flannel's flat overlay network and enjoy its simplicity.
+From the data analysis, we can now clearly guide you to select either Flannel or Cilium as the CNI for your RKE cluster. Your choice will heavily depend on whether you need the additional features that Cilium offers or whether you can live with Flannel's flat overlay network and enjoy its simplicity.
 
 \subsection{Outlook}
 
-EBPF is currently the most talked-about feature in the Linux kernel, offering the most exciting prospects for network performance improvements. Cilium was developed on top of eBPF and will significantly benefit from future enhancements. It does not take much imagination to see a significant further increase in bandwidth in the future.
+EBPF is currently the most talked-about feature in the Linux kernel, offering the most exciting prospects for network performance improvements. Cilium was developed on top of eBPF and will significantly benefit from future enhancements to it. It does not take much imagination to see a significant further increase in bandwidth in the future.
 
 On the other hand, Flannel is relatively simple and has a low overall overhead, so all performance improvements in the Linux kernel for IP networking outside of eBPF will also benefit Flannel's performance and bandwidth. We can also most likely look forward to an increase in bandwidth in the future.
 
-Both CNIs, Flannel and Cilium, will likely remain the top choices to select as CNI for Kubernetes clusters for the next few years.
+Both CNIs, Flannel, and Cilium, will likely remain the top choices to select as CNI for Kubernetes clusters for the next few years.
