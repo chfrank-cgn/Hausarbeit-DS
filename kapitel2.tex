@@ -11,17 +11,17 @@
 
 For this paper's data analysis and visualization, we will use raw benchmark data from the original author's Github pages for the years \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2024-01}{2024}, \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2021-05}{2021}, and \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2020-08}{2020} and perform a secondary data analysis.\footnote{See \textit{Jillier, W. (2021)}: A Guide To Secondary Data Analysis. \cite{secondaryDA}} We will use the previously collected measurements instead of gathering new data to answer our research question.
 
-In their 2024 article, Alexis Ducastel recommended Cilium as the preferred CNI for RKE2.
+In their 2024 article, Alexis Ducastel posed the same question and recommended Cilium as the preferred CNI for RKE2. Their conclusion was based on a combination of functionality and performance.
 
 \subsection{Data Wrangling}
 
-To support the secondary analysis, we had to convert the original raw data into a common format. The CSV format is widely supported in statistical analysis, so we chose this as the target format.
+To support the secondary analysis, we had to convert the original raw data into a standard format. The CSV format is widely supported in statistical analysis, so we chose this as our target format; most major programming languages (e.g., Python, R) and tools (e.g., Tableau, Excel) support CSV natively.
 
 \subsubsection{2020 and 2021 - Adding Header information}
 
 The original raw data for 2020 and 2021 are in tab-separated files without headers, split by CNI; they do not contain header information.
 
-From the overall aggregated result spreadsheets, we added the following headers to the TSV Files and subsequently converted them to CSV format:
+From the spreadsheets with overall aggregated results that are available on the author's Github, we added the following headers to the TSV Files and subsequently converted the data files to CSV format:
 
 \begin{itemize}
     \item smem - "Server Memory (MB)"
@@ -54,7 +54,7 @@ We also removed the discovered MTU size from the measurements, as it was a const
 
 \subsubsection{2024 - Data Transformation}
 
-The original raw data for 2024 is formatted as \href{https://prometheus.io/docs/concepts/metric_types/#gauge}{Prometheus gauges}, also split by CNI.
+The original raw data for 2024 is formatted as \href{https://prometheus.io/docs/concepts/metric_types/#gauge}{Prometheus gauges}, and the data sets are also split by CNI.
 
 \begin{figure}[H]
 \centering
@@ -63,7 +63,7 @@ The original raw data for 2024 is formatted as \href{https://prometheus.io/docs/
 \label{fig:flannel-prom}
 \end{figure}
 
-As the 2024 data format was vastly different, we decided to convert the Prometheus gauges for easier handling. The 2024 data also had many more data points, so we mapped the gauges to the most appropriate fields and adjusted the scale where necessary (e.g., Bytes to Megabytes).
+As the 2024 data format vastly differs, we converted the Prometheus gauges for easier handling. The 2024 data also has many more data points, so we mapped the gauges to the most appropriate fields and adjusted the scale where necessary (e.g., Bytes to Megabytes).
 
 \begin{itemize}
     \item smem - "benchmark\_mem\_bytes - server - idle"
@@ -94,9 +94,9 @@ As the 2024 data format was vastly different, we decided to convert the Promethe
 
 \subsection{What's Not in the Data}
 
-The benchmark data was originally recorded with the author's \href{https://github.com/InfraBuilder/k8s-bench-suite}{k8s-bench-suite}. Their test suite uses \href{https://iperf.fr/}{iPerf} for measurements and provides a convenient shell interface for data collection.
+The benchmark data was initially recorded with the author's \href{https://github.com/InfraBuilder/k8s-bench-suite}{k8s-bench-suite}. Their test suite uses \href{https://iperf.fr/}{iPerf3} for measurements and provides a convenient shell interface for data collection. iPerf3 is a tool for active measurements of the maximum achievable bandwidth on IP networks and is most suitable for measuring CNI bandwidth.
 
-The data itself does not contain information on the infrastructure setup and the software versions used.
+The data itself does not contain information on the infrastructure setup and the software versions used, so we record the information here:
 
 \begin{itemize}
     \item The \href{https://github.com/InfraBuilder/benchmark-k8s-cni-2020-08/blob/master/PROTOCOL.md}{2020 setup} was three \href{https://www.supermicro.com/en/}{Supermicro} bare-metal servers connected through a Supermicro 10Gbit switch, running \href{https://ubuntu.com/server}{Ubuntu} 18.04 LTS and Kubernetes 1.19.0.
@@ -146,23 +146,23 @@ The data itself does not contain information on the infrastructure setup and the
 \label{tab:2024ver}
 \end{table}
 
-\subsection{Data Exploration}
+\subsection{Data Exploration Method}
 
-We will analyze the data sets using the methods of Exploratory Data Analysis (EDA).
+We will analyze the data sets using the Exploratory Data Analysis (EDA) method.
 
 John Tukey has promoted EDA since 1977 to encourage data scientists to explore data and formulate hypotheses that could lead to new data collection and experiments.\footnote{See \textit{Tukey, J.W. (1977)}: Exploratory data analysis. \cite{exploratoryDA}}
 
 EDA uses statistical methods to analyze and visualize the data, understand key characteristics, and identify patterns and relationships. 
 
-We will use summary statistics, such as mode, mean, and median, to understand the data and augment this with data visualization, e.g. histograms. We have already cleaned up the data and converted the data sets to a common format. EDA should help us to make informed decisions about how to proceed with our analysis and draw meaningful conclusions from the data.\footnote{See \textit{Gemini (2024)}: Exploratory Data Analysis. \cite{bardExploratory}}  
+We will use summary statistics, such as mode, mean, and median, to understand the data and augment this with data visualization, e.g., histograms. We have already cleaned up the data and converted the data sets to a common format. EDA should help us to make informed decisions about how to proceed with our analysis and draw meaningful conclusions from the data.\footnote{See \textit{Gemini (2024)}: Exploratory Data Analysis. \cite{bardExploratory}}  
 
 We will not use the data to predict performance gains in future releases of the CNIs or through improved network speeds; instead, we will focus on our research question and attempt to arrive at a recommendation for CNI usage.
 
 \subsection{Tools}
 
-We performed most of the initial data wrangling with \href{https://www.gnu.org/software/bash/}{Bash} and \href{https://pubs.opengroup.org/onlinepubs/9699919799/utilities/vi.html}{vi}, and \href{https://www.microsoft.com/en-us/microsoft-365/excel}{Microsoft Excel} to support operations on columns and weighted ranking.
+We performed most of the initial data wrangling with \href{https://www.gnu.org/software/bash/}{Bash} and \href{https://pubs.opengroup.org/onlinepubs/9699919799/utilities/vi.html}{vi}, and \href{https://www.microsoft.com/en-us/microsoft-365/excel}{Microsoft Excel} to support operations on columns and the final weighted ranking.
 
-For the subsequent data exploration, we will use \href{https://www.r-project.org/}{R} and \href{https://posit.co/download/rstudio-desktop/}{RStudio}.
+For the subsequent data exploration, we will mainly use \href{https://www.r-project.org/}{R} and \href{https://posit.co/download/rstudio-desktop/}{RStudio}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
